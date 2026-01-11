@@ -9,6 +9,11 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   
 </head>
+  <div id="imageModal" class="fixed inset-0 z-[100] hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <button onclick="closeImage()" class="absolute top-5 right-10 text-white text-5xl font-bold hover:text-gray-300 transition-colors">&times;</button>
+    
+    <img id="modalImg" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
+</div>
 <body>
 
 <section class="text-gray-600 body-font">
@@ -274,13 +279,18 @@
          class="cursor-pointer object-cover w-1/2 aspect-[3/2] rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
          onclick="openImage(this.src)">
   </div>
-
+           
+  <div class="flex flex-row space-x-4">
   <img src="images/springer_certificate.jpeg" alt="Springer Certificate"
-       class="cursor-pointer object-cover w-72 aspect-[3/2] rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+       class="cursor-pointer object-cover  w-1/2 aspect-[3/2] rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
        onclick="openImage(this.src)">
-
+    <img src="images/XAI_certificate_brainware.jpeg" alt="Springer Certificate"
+       class="cursor-pointer object-cover  w-1/2 aspect-[3/2] rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+       onclick="openImage(this.src)">
+ </div>
+           
   <img src="images/Patent publication.jpeg" alt="Patent Publication"
-       class="cursor-pointer object-cover w-full aspect-[3/2] rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+       class="cursor-pointer object-cover  w-1/2 aspect-[3/2] rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
        onclick="openImage(this.src)">
 
 
@@ -526,14 +536,33 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+  // 1. Initialize Animations
   AOS.init({
-    duration: 800, // values from 0 to 3000, with step 50ms
-    once: false, // whether animation should happen only once - while scrolling down
+    duration: 800,
+    once: false,
   });
+
+  // 2. Function to Open the Image
+  function openImage(src) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImg');
+    
+    modal.classList.remove('hidden'); // Show the modal
+    modalImg.src = src;               // Put the clicked image source here
+    document.body.style.overflow = 'hidden'; // Stop the page from scrolling behind the popup
+  }
+
+  // 3. Function to Close the Image
+  function closeImage() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.add('hidden');    // Hide the modal
+    document.body.style.overflow = 'auto'; // Let the page scroll again
+  }
 </script>
 
 </body>
 </html>
+
 
 
 
